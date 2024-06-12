@@ -4,24 +4,6 @@ on:
   pull_request:
     types: [opened, reopened, synchronize]
   workflow_dispatch:
-    inputs:
-      MOSIP_DOMAIN:
-        description: 'Provide name of MOSIP domain (ex: sandbox.xyz.net)'
-        required: true
-        type: string
-      MOSIP_EMAIL_ID:
-        description: "The email address used by Let's Encrypt to notify about SSL certificate expiration."
-        required: true
-        type: string
-      AWS_PROVIDER_REGION:
-        description: "AWS PROVIDER REGION"
-        required: true
-        type: string
-      CLUSTER_NAME:
-        description: "Cluster / Environment Name"
-        required: true
-        type: string
-
   push:
     branches:
       - develop*
