@@ -51,11 +51,7 @@ jobs:
       - name: Terraform Plan
         id: plan
         run: |
-          terraform plan -no-color -input=false \
-          -var MOSIP_DOMAIN="${{inputs.MOSIP_DOMAIN}}" \
-          -var MOSIP_EMAIL_ID="${{inputs.MOSIP_EMAIL_ID}}" \
-          -var AWS_PROVIDER_REGION="${{inputs.AWS_PROVIDER_REGION}}" \
-          -var CLUSTER_NAME="${{inputs.CLUSTER_NAME}}"
+          terraform plan -no-color -input=false
         continue-on-error: true
 
       #- name: Terraform plan
