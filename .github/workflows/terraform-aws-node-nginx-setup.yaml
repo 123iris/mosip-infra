@@ -32,6 +32,11 @@ env:
 jobs:
   terraform:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        # We keep Terraform files in the terraform directory.
+        working-directory: ./deployment/v3/terraform/aws
     steps:
       - uses: actions/checkout@v3
 
@@ -40,9 +45,12 @@ jobs:
         with:
           terraform_version: v1.8.5
 
+      - name: Create terraform log file
+        run: mkdir -p "$(dirname ${{env.TF_LOG_PATH}} )" && touch "${{env.TF_LOG_PATH}}"
+
       - name: Terraform fmt
         id: fmt
-        run: pwd && terraform fmt
+        run: terraform fmt
 
       - name: Terraform Init
         id: init
