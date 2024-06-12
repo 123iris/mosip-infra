@@ -1,4 +1,5 @@
 variable "AWS_PROVIDER_REGION" { type = string }
+variable "CLUSTER_NAME" { type = string }
 
 variable "MOSIP_DOMAIN" {
   description = "MOSIP DOMAIN : (ex: sandbox.xyz.net)"

@@ -18,7 +18,7 @@ provider "aws" {
 
 module "aws-resource-creation" {
   source = "./modules/aws-resource-creation"
-  CLUSTER_NAME        = "TERRAFORM-TESTING"
+  CLUSTER_NAME        = var.CLUSTER_NAME
   AWS_PROVIDER_REGION = var.AWS_PROVIDER_REGION
   SSH_KEY_NAME        = "mosip-aws"
   K8S_INSTANCE_TYPE   = "t2.micro"

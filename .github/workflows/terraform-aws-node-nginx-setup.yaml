@@ -5,19 +5,23 @@ on:
     types: [opened, reopened, synchronize]
   workflow_dispatch:
     inputs:
-      IGNORE_CHARTS:
-        description: 'Provide list of charts to be ignored separated by pipe(|)'
-        required: false
-        default: '""'
+      MOSIP_DOMAIN:
+        description: 'Provide name of MOSIP domain (ex: sandbox.xyz.net)'
+        required: true
         type: string
-      CHART_PUBLISH:
-        description: 'Chart publishing to gh-pages branch'
-        required: false
-        default: 'NO'
+      MOSIP_EMAIL_ID:
+        description: "The email address used by Let's Encrypt to notify about SSL certificate expiration."
+        required: true
         type: string
-        options:
-          - YES
-          - NO
+      AWS_PROVIDER_REGION:
+        description: "AWS PROVIDER REGION"
+        required: true
+        type: string
+      CLUSTER_NAME:
+        description: "Cluster / Environment Name"
+        required: true
+        type: string
+
   push:
     branches:
       - develop*
@@ -63,7 +67,12 @@ jobs:
 
       - name: Terraform Plan
         id: plan
-        run: terraform plan -no-color -input=false
+        run: |
+          terraform plan -no-color -input=false \
+          -var MOSIP_DOMAIN="${{input.MOSIP_DOMAIN}}" \
+          -var MOSIP_EMAIL_ID="${{inputs.MOSIP_EMAIL_ID}}" \
+          -var AWS_PROVIDER_REGION="${{inputs.AWS_PROVIDER_REGION}}" \
+          -var CLUSTER_NAME="${{inputs.CLUSTER_NAME}}"
         continue-on-error: true
 
       #- name: Terraform plan

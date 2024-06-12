@@ -23,6 +23,7 @@ The setup includes security groups, an NGINX server, and a Kubernetes (K8S) clus
   ```
   $ export AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY_ID>
   $ export AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY>
+  $ export TF_VAR_SSH_PRIVATE_KEY=<EC2_SSH_PRIVATE_KEY>
   ```
 
 ## Files
@@ -44,11 +45,11 @@ The setup includes security groups, an NGINX server, and a Kubernetes (K8S) clus
   terraform validate
   ```
   ```
-  terraform plan -var MOSIP_DOMAIN=<MOSIP_DOMAIN> -var MOSIP_EMAIL_ID="<EMAIL-ID>" -var AWS_PROVIDER_REGION="<AWS_PROVIER_REGION>"
+  terraform plan -var MOSIP_DOMAIN=<MOSIP_DOMAIN> -var MOSIP_EMAIL_ID="<EMAIL-ID>" -var AWS_PROVIDER_REGION="<AWS_PROVIDER_REGION>"
   ```
 * Apply the Terraform configuration:
   ```
-  terraform apply -var MOSIP_DOMAIN=<MOSIP_DOMAIN> -var MOSIP_EMAIL_ID="<EMAIL-ID>" -var AWS_PROVIDER_REGION="<AWS_PROVIER_REGION>"
+  terraform apply -var MOSIP_DOMAIN=<MOSIP_DOMAIN> -var MOSIP_EMAIL_ID="<EMAIL-ID>" -var AWS_PROVIDER_REGION="<AWS_PROVIDER_REGION>"
   ```
 
 ## Destroy
