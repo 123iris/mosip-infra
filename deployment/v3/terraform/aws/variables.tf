@@ -17,3 +17,5 @@ variable "MOSIP_EMAIL_ID" {
     error_message = "The email address must be a valid email format (e.g., user@example.com)."
   }
 }
+
+variable "SSH_PRIVATE_KEY" { type = string }
