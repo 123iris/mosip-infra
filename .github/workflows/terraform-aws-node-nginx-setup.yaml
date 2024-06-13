@@ -85,7 +85,6 @@ jobs:
         run: exit 1
 
       - name: Add the Terraform log file / *.tfstate files / terraform format changes
-        if: steps.plan.outcome == 'failure'
         run: git status
 
       - uses: 8398a7/action-slack@v3
