@@ -29,7 +29,6 @@ jobs:
 
       - name: Setup branch and env
         run: |
-          git branch
           # Strip git ref prefix from version
           echo "BRANCH_NAME=$(echo ${{ github.ref }} | sed -e 's,.*/\(.*\),\1,')" >> $GITHUB_ENV
           echo "GPG_TTY=$(tty)" >> $GITHUB_ENV
@@ -93,13 +92,13 @@ jobs:
 
       - name: Add the Terraform log file / *.tfstate files / terraform format changes
         run: |
-          echo "email : ${{ github.event.pusher.email }}"
           git status
           git add -A
           git status
           git config --global user.email ${{ github.actor }}@users.noreply.github.com
           git config --global user.name ${{ github.actor }}
           git commit -s -am "Terraform files github actions"
+          git git merge origin/${{ github.event.pull_request.head.ref }}
           git push origin HEAD:refs/heads/${{ github.event.pull_request.head.ref }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
