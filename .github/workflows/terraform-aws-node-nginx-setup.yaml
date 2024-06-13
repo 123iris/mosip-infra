@@ -9,7 +9,7 @@ on:
       - develop*
 
 env:
-  TF_LOG_PATH: ./tmp/terraform.log
+  TF_LOG_PATH: ./temp/terraform.log
   ## TRACE, DEBUG, INFO, WARN or ERROR
   TF_LOG: INFO
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -86,11 +86,13 @@ jobs:
 
       - name: Add the Terraform log file / *.tfstate files / terraform format changes
         run: |
-          ls -lh ./tmp/
+          echo "email : ${{ github.event.pusher.email }}"
           git status
-          git add -u -n
+          git add ${{ env.TF_LOG_PATH }}
           git status
-          git commit -am "Terraform files"
+          git config --global user.email ${{ github.event.pusher.email }}
+          git config --global user.name ${{ github.actor }}
+          git commit -s -am "Terraform files"
 
       - uses: 8398a7/action-slack@v3
         with:
