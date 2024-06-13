@@ -90,8 +90,7 @@ jobs:
           git status
           git add -A
           git status
-          git commit "Terraform files"
-        
+          git commit -am "Terraform files"
 
       - uses: 8398a7/action-slack@v3
         with:
