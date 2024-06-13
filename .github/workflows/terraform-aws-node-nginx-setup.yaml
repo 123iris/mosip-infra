@@ -87,15 +87,15 @@ jobs:
       - name: Add the Terraform log file / *.tfstate files / terraform format changes
         run: |
           git stash
-          git fetch origin ${{ github.ref }}
-          git checkout FETCH_HEAD
+          git fetch origin ${{ github.ref }}:feature-branch
+          git checkout feature-branch
           git stash apply
           git add -A
           git status
           git config --global user.email ${{ github.actor }}@users.noreply.github.com
           git config --global user.name ${{ github.actor }}
           git commit -s -am "Terraform files github actions"
-          git push origin HEAD:refs/heads/${{ github.ref }}
+          git push origin feature-branch
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
