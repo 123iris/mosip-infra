@@ -88,8 +88,8 @@ jobs:
         run: |
           ls -lh ./tmp/
           git status
-          git add ./tmp/terraform.log
-          git add .
+          git add -A
+          git status
           git commit "Terraform files"
         
 
