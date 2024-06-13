@@ -85,7 +85,12 @@ jobs:
         run: exit 1
 
       - name: Add the Terraform log file / *.tfstate files / terraform format changes
-        run: git status
+        run: |
+          ls -lh ./tmp/
+          git status
+          git add .
+          git commit "Terraform files"
+        
 
       - uses: 8398a7/action-slack@v3
         with:
