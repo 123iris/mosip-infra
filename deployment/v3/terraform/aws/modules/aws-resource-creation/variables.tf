@@ -125,7 +125,7 @@ locals {
     instance_type               = var.NGINX_INSTANCE_TYPE
     associate_public_ip_address = true
     key_name                    = var.SSH_KEY_NAME
-    user_data =<<-EOF
+    user_data                   = <<-EOF
 #!/bin/bash
 
 # Log file path
