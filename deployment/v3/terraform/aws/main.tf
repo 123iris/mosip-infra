@@ -17,7 +17,7 @@ provider "aws" {
 }
 
 module "aws-resource-creation" {
-  source = "./modules/aws-resource-creation"
+  source              = "./modules/aws-resource-creation"
   CLUSTER_NAME        = var.CLUSTER_NAME
   AWS_PROVIDER_REGION = var.AWS_PROVIDER_REGION
   SSH_KEY_NAME        = var.SSH_KEY_NAME
@@ -38,5 +38,5 @@ module "nginx-setup" {
   MOSIP_K8S_CLUSTER_NODES_PRIVATE_IP_LIST = module.aws-resource-creation.MOSIP_K8S_CLUSTER_NODES_PRIVATE_IP_LIST
   MOSIP_PUBLIC_DOMAIN_LIST                = module.aws-resource-creation.MOSIP_PUBLIC_DOMAIN_LIST
   CERTBOT_EMAIL                           = var.MOSIP_EMAIL_ID
-  SSH_PRIVATE_KEY = var.SSH_PRIVATE_KEY
+  SSH_PRIVATE_KEY                         = var.SSH_PRIVATE_KEY
 }
