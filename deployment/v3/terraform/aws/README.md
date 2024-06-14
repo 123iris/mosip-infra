@@ -9,7 +9,6 @@ $ export TF_LOG_PATH="/tmp/terraform.log"
 * TF_VAR_ : is a syntax 
 * CLUSTER_NAME=dev : is variable and its value
 
-
 # Terraform Setup for MOSIP Infrastructure
 
 ## Overview
