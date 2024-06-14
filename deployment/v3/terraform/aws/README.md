@@ -1,5 +1,4 @@
 # Fetch variables via ENV variables
-
 ```
 $ export TF_VAR_CLUSTER_NAME=dev
 $ export TF_LOG="DEBUG"
