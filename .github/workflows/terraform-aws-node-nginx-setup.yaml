@@ -37,7 +37,7 @@ jobs:
 
       - name: Terraform fmt
         id: fmt
-        run: terraform fmt
+        run: terraform fmt -recursive
 
       - name: Terraform Init
         id: init
@@ -52,6 +52,20 @@ jobs:
         run: |
           terraform plan -no-color -input=false -var-file="./env.tfvars"
         continue-on-error: true
+
+      - name: Add the Terraform log file / *.tfstate files / terraform format changes
+        run: |
+          git stash
+          gh pr checkout ${{ github.event.pull_request.number }}
+          git stash apply
+          git add -A
+          git status
+          git config --global user.email ${{ github.actor }}@users.noreply.github.com
+          git config --global user.name ${{ github.actor }}
+          git commit -s -am "Terraform files github actions"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: actions/github-script@v7
         if: github.event_name == 'pull_request'
@@ -84,19 +98,6 @@ jobs:
         if: steps.plan.outcome == 'failure'
         run: exit 1
 
-      - name: Add the Terraform log file / *.tfstate files / terraform format changes
-        run: |
-          git stash
-          gh pr checkout ${{ github.event.pull_request.number }}
-          git stash apply
-          git add -A
-          git status
-          git config --global user.email ${{ github.actor }}@users.noreply.github.com
-          git config --global user.name ${{ github.actor }}
-          git commit -s -am "Terraform files github actions"
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: 8398a7/action-slack@v3
         with:
